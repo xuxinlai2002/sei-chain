@@ -4,26 +4,12 @@ const { exec } = require("child_process");
 const CW20_BASE_WASM_LOCATION = "../cw20_base.wasm";
 
 async function main() {
-    let codeId = await deployWasm();
-    console.log(`codeId: ${codeId}`);
-    let adminAddr = await getAdmin();
-    console.log(`adminAddr: ${adminAddr}`);
-    let contractAddress = await instantiateWasm(codeId, adminAddr);
-    console.log(`contractAddress: ${contractAddress}`)
-    // deploy the CW20ERC20Wrapper solidity contract with the contractAddress passed in
-    const [deployer] = await hre.ethers.getSigners();
-    await fundDeployer(deployer.address);
+    const SimpleStorage = await hre.ethers.getContractFactory("SimpleStorage");
+    const simpleStorage = await SimpleStorage.deploy();
 
-    console.log(
-        "Deploying contracts with the account:",
-        deployer.address
-    );
-    const CW20ERC20Wrapper = await ethers.getContractFactory("CW20ERC20Wrapper");
-    let cW20ERC20Wrapper = await CW20ERC20Wrapper.deploy(contractAddress, "BTOK", "TOK");
-    await cW20ERC20Wrapper.waitForDeployment()
-    let addressToCheck = await deployer.getAddress();
-    let balance = await cW20ERC20Wrapper.balanceOf(addressToCheck);
-    console.log(`Balance of ${addressToCheck}: ${balance}`);
+    await simpleStorage.deployed();
+
+    console.log("SimpleStorage deployed to:", simpleStorage.address);
 }
 
 async function fundDeployer(deployerAddress) {
@@ -44,8 +30,6 @@ async function fundDeployer(deployerAddress) {
         });
     });
 }
-
-
 
 async function deployWasm() {
     // Wrap the exec function in a Promise
@@ -128,9 +112,9 @@ async function instantiateWasm(codeId, adminAddr) {
     return contractAddress;
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

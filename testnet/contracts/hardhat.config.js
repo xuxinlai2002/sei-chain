@@ -14,12 +14,9 @@ module.exports = {
   },
   networks: {
     localhost: {
-      url: "http://localhost:1317",
-      chainId: 1337,
-      accounts: [process.env.PRIVATE_KEY]
+      url: "http://localhost:8545",
+      chainId: 713715,
+      accounts: [process.env.PRIVATE_KEY || ""]
     }
-  },
-  paths: {
-    sources: "./contracts"
   }
-};
+}; 
