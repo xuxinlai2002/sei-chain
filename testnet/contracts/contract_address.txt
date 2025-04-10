@@ -1,1 +1,2 @@
-
+SimpleStorage Contract Address: 0x303d22b27AfcDb65cc355C5DE07Beb2c2a14367a
+Deployer Address: sei1dhwusw3elx45purycmwzrfj0he7g8upnakw30r
