@@ -35,4 +35,24 @@ seid collect-gentxs --home ../.sei
 # 验证创世文件
 seid validate-genesis --home ../.sei
 
+# 配置 memiavl store
+cat > ../.sei/config/app.toml << EOF
+[state-commit]
+sc-enable = true
+sc-zero-copy = false
+sc-async-commit-buffer = 100
+sc-keep-recent = 1
+sc-snapshot-interval = 10000
+sc-snapshot-writer-limit = 2
+sc-cache-size = 100000
+
+[state-store]
+ss-enable = true
+ss-backend = "pebbledb"
+ss-async-write-buffer = 100
+ss-keep-recent = 100000
+ss-prune-interval = 600
+ss-import-num-workers = 1
+EOF
+
 echo "初始化完成！" 

@@ -92,10 +92,10 @@ num-orphan-per-file = 0
 orphan-dir = ""
 
 # concurrency-workers defines how many workers to run for concurrent transaction execution
-# concurrency-workers = 20
+concurrency-workers = 500
 
 # occ-enabled defines whether OCC is enabled or not for transaction execution
-occ-enabled = false
+occ-enabled = true
 
 ###############################################################################
 ###                         Telemetry Configuration                         ###
@@ -253,7 +253,7 @@ genesis-stream-file = ""
 
 [state-commit]
 # Enable defines if the SeiDB should be enabled to override existing IAVL db backend.
-sc-enable = false
+sc-enable = true
 
 # Defines the SC store directory, if not explicitly set, default to application home directory
 sc-directory = ""
@@ -275,13 +275,16 @@ sc-keep-recent = 1
 sc-snapshot-interval = 10000
 
 # SnapshotWriterLimit defines the max concurrency for taking commit store snapshot
-sc-snapshot-writer-limit = 0
+sc-snapshot-writer-limit = 2
+
+# CacheSize defines the size of the LRU cache for each store on top of the tree, default to 100000.
+sc-cache-size = 100000
 
 [state-store]
 # Enable defines whether the state-store should be enabled for storing historical data.
 # Supporting historical queries or exporting state snapshot requires setting this to true
 # This config only take effect when SeiDB is enabled (sc-enable = true)
-ss-enable = false
+ss-enable = true
 
 # Defines the directory to store the state store db files
 # If not explicitly set, default to application home directory

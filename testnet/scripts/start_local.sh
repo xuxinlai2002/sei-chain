@@ -1,12 +1,14 @@
 #!/bin/bash
 
-# 设置变量
-CHAIN_ID="sei-local-1"
-CHAINFLAG="--chain-id ${CHAIN_ID}"
+# 检查是否已经初始化
+if [ ! -d "../.sei" ]; then
+    echo "节点尚未初始化,正在执行初始化..."
+    ./init_local.sh
+fi
 
 # 启动节点
-seid start ${CHAINFLAG} \
-  --home ../.sei \
+echo "正在启动节点..."
+seid start --home ../.sei \
   --rpc.laddr tcp://0.0.0.0:26657 \
   --grpc.address 0.0.0.0:9090 \
   --address tcp://0.0.0.0:26656 \
