@@ -76,6 +76,11 @@ max_log_no_block = 10000
 max_blocks_for_log = 2000
 max_subscriptions_new_head = 10000
 enable_test_api = false
+
+[evm-log]
+level = "debug"
+module = ["eth", "evm", "vm", "state", "txpool"]
+file = "../.sei/evm.log"
 EOF
 
 echo "初始化完成！" 

@@ -1,0 +1,123 @@
+正在启动节点...
+[90m2:38PM[0m [32mINF[0m --tracing not passed in, tracing is not enabled
+[90m2:38PM[0m [32mINF[0m Creating node metrics provider
+[90m2:38PM[0m [32mINF[0m Starting Process
+[90m2:38PM[0m [32mINF[0m SeiDB SC is enabled, running node with StoreV2 commit store
+[90m2:38PM[0m [32mINF[0m SeiDB StateStore is enabled, running pebbledb for historical state
+INFO [04-16|14:38:25.648] [JOB 1] WAL file ../.sei/data/pebbledb/000391.log with log number 000391 stopped reading at offset: 28873731; replayed 217132 keys in 33517 batches
+[90m2:38PM[0m [32mINF[0m Pruned state store till version 116000 took 5.82875ms
+
+[90m2:38PM[0m [32mINF[0m Recovering from changelog ../.sei at latest SS version 216000
+INFO [04-16|14:38:25.792] [JOB 1] WAL file ../.sei/data/receipt.db/000161.log with log number 000161 stopped reading at offset: 3913; replayed 15 keys in 10 batches
+[90m2:38PM[0m [32mINF[0m Recovering from changelog ../.sei/data/receipt.db/changelog at latest SS version 74886
+[90m2:38PM[0m [32mINF[0m Start replaying changelog to recover StateStore from offset 41 to 41
+[90m2:38PM[0m [32mINF[0m SeiDB load target memIAVL version 0, copyExisting = false
+
+[90m2:38PM[0m [32mINF[0m Start catching up and replaying the MemIAVL changelog file
+Replayed 1000 changelog entries
+Replayed 2000 changelog entries
+Replayed 3000 changelog entries
+Replayed 4000 changelog entries
+Replayed 5000 changelog entries
+[90m2:38PM[0m [32mINF[0m Finished the replay and caught up to version 0
+[90m2:38PM[0m [32mINF[0m starting node with ABCI Tendermint in-process
+[90m2:38PM[0m [32mINF[0m starting service [36mimpl=[0mNode [36mservice=[0mNode
+[90m2:38PM[0m [32mINF[0m starting service [36mimpl=[0mproxyClient [36mmodule=[0mproxy [36mservice=[0mproxyClient
+[90m2:38PM[0m [32mINF[0m starting service [36mimpl=[0mlocalClient [36mservice=[0mlocalClient
+[90m2:38PM[0m [32mINF[0m starting service [36mimpl=[0mEventBus [36mmodule=[0meventbus [36mservice=[0mEventBus
+[90m2:38PM[0m [32mINF[0m starting service [36mimpl=[0mPubSub [36mmodule=[0mevents [36mservice=[0mPubSub
+[90m2:38PM[0m [32mINF[0m starting service [36mimpl=[0mIndexerService [36mmodule=[0mtxindex [36mservice=[0mIndexerService
+[90m2:38PM[0m [32mINF[0m ABCI Handshake App Info [36mhash=[0m139186BF9ECA07D48F5A3ACB2BDE67F74475AFE437388FCDFD1CA46967F41007 [36mheight=[0m215999 [36mmodule=[0mhandshaker [36mprotocol-version=[0m0 [36msoftware-version=[0mv0.1.0-3-gf7c803b8
+[90m2:38PM[0m [32mINF[0m ABCI Replay Blocks [36mappHeight=[0m215999 [36mmodule=[0mhandshaker [36mstateHeight=[0m215999 [36mstoreHeight=[0m216000
+[90m2:38PM[0m [32mINF[0m Replay last block using real app [36mmodule=[0mhandshaker
+[90m2:38PM[0m [32mINF[0m optimistic processing ineligible
+[90m2:38PM[0m [32mINF[0m Current block time 2025-04-15 20:12:06.769506 +0000 UTC, last 2025-04-15 20:11:24.992323 +0000 UTC; duration 60000000000
+[90m2:38PM[0m [33mDBG[0m Sending coins from module to module [36mamount=[0m1000000000usei [36mmodule=[0mx/bank [36mrecipient=[0mnot_bonded_tokens_pool [36mrecipient_address=[0msei1tygms3xhhs3yv487phx3dw4a95jn7t7lvhygfz [36msender=[0mbonded_tokens_pool [36msender_address=[0msei1fl48vsnmsdzcv85q5d2q4z5ajdha8yu3chcelk
+[90m2:38PM[0m [32mINF[0m successfully verified supply light invariance
+[90m2:38PM[0m [32mINF[0m FinalizeBlock took 1ms
+[90m2:38PM[0m [32mINF[0m finalized block [36mblock_app_hash=[0m5033F642EE3E4CD7E9C15C31A9AFC8552F2696DE2377FEF7920A1421F8499EFC [36mheight=[0m216000 [36mlatency_ms=[0m3 [36mmodule=[0mhandshaker [36mnum_txs_res=[0m0 [36mnum_val_updates=[0m1
+[90m2:38PM[0m [33mDBG[0m updates to validators [36mmodule=[0mhandshaker [36mupdates=[0m5D3981CC830B7A456D4C3D650A5151BB5B741C12:0
+Error: error starting node: error on replay: commit failed for application: changing validator set: applying the validator changes would result in empty set
+[90m2:38PM[0m [32mINF[0m stopping service [36mmodule=[0mtxindex [36mservice=[0mIndexerService
+[90m2:38PM[0m [32mINF[0m stopping service [36mservice=[0mlocalClient
+[90m2:38PM[0m [32mINF[0m stopped service [36mservice=[0mlocalClient
+[90m2:38PM[0m [32mINF[0m stopping service [36mmodule=[0mproxy [36mservice=[0mproxyClient
+[90m2:38PM[0m [32mINF[0m stopped service [36mmodule=[0mproxy [36mservice=[0mproxyClient
+[90m2:38PM[0m [32mINF[0m stopping service [36mmodule=[0mevents [36mservice=[0mPubSub
+[90m2:38PM[0m [32mINF[0m stopped service [36mmodule=[0mevents [36mservice=[0mPubSub
+[90m2:38PM[0m [32mINF[0m stopping service [36mmodule=[0meventbus [36mservice=[0mEventBus
+[90m2:38PM[0m [32mINF[0m stopped service [36mmodule=[0meventbus [36mservice=[0mEventBus
+[90m2:38PM[0m [32mINF[0m stopped service [36mmodule=[0mtxindex [36mservice=[0mIndexerService
+Usage:
+  seid start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://0.0.0.0:26658")
+      --archival-arweave-index-db-full-path string      Full local path to the levelDB used for indexing arweave data
+      --archival-arweave-node-url string                Arweave Node URL that stores archived data
+      --archival-db-type string                         Archival DB type. Valid options: arweave
+      --archival-version int                            Application data before this version is stored in archival DB
+      --chain-id string                                 Chain ID
+      --compaction-interval uint                        Time interval in between forced levelDB compaction. 0 means no forced compaction.
+      --concurrency-workers int                         Number of workers to process concurrent transactions (default 20)
+      --consensus.create-empty-blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create-empty-blocks-interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double-sign-check-height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --consensus.gossip-tx-key-only                    set this to false to gossip entire data rather than just the key (default true)
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db-backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb (default "goleveldb")
+      --db-dir string                                   database directory (default "data")
+      --genesis-hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no Tendermint process is started)
+      --grpc-web.address string                         The gRPC-Web server address to listen on (default "0.0.0.0:9091")
+      --grpc-web.enable                                 Define if the gRPC-Web server should be enabled. (Note: gRPC must also be enabled.) (default true)
+      --grpc.address string                             the gRPC server address to listen on (default "0.0.0.0:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                     The application home directory (default "/Users/xuxinlai/.sei")
+      --iavl-disable-fastnode                           Enable fast node for IAVL tree (default true)
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+      --migrate-height int                              Height at which to start the migration
+      --migrate-iavl                                    Run migration of IAVL data store to SeiDB State Store
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune Tendermint blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --mode string                                     node mode (full | validator | seed) (default "full")
+      --moniker string                                  node name (default "MacBook-Pro.local")
+      --num-orphan-per-file int                         Number of orphans to store on each file if storing orphans separately (default 100000)
+      --orphan-dir string                               Directory to store orphan files if storing orphans separately (default "/Users/xuxinlai/.sei/orphans")
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent-peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private-peer-ids string                     comma-delimited private peer IDs
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --p2p.upnp                                        enable/disable UPNP port forwarding
+      --priv-validator-laddr string                     socket address to listen on for connections from external priv-validator process
+      --profile                                         Enable Profiling in the application
+      --proxy-app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore', 'e2e' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-every uint                         Offset heights to keep on disk after 'keep-every' (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof-laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --separate-orphan-storage                         Whether to store orphans outside main application levelDB
+      --separate-orphan-versions-to-keep int            Number of versions to keep if storing orphans separately (default 2)
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --tracing                                         Enable Tracing for the app
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-tendermint                                 Run abci app embedded in-process with tendermint (default true)
+      --x-crisis-skip-assert-invariants                 Skip x/crisis invariants check on startup
+
+Global Flags:
+      --log_format string   The logging format (json|plain)
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic)
+

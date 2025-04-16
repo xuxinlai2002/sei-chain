@@ -27,7 +27,7 @@ moniker = "my-local-testnet"
 # * seed node
 #   - only P2P, PEX Reactor
 #   - No priv_validator_key.json, priv_validator_state.json
-mode = "validator"
+mode = "full"
 
 # Database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb
 # * goleveldb (github.com/syndtr/goleveldb - most popular implementation)
@@ -72,7 +72,7 @@ abci = "socket"
 
 # If true, query the ABCI app on connecting to a new peer
 # so the app can decide if we should keep the connection or not
-filter-peers = true
+filter-peers = false
 
 
 #######################################################
@@ -245,7 +245,7 @@ max-connections = 200
 max-incoming-connection-attempts = 100
 
 # Set true to enable the peer-exchange reactor
-pex = false
+pex = true
 
 # Comma separated list of peer IDs to keep private (will not be gossiped to other peers)
 # Warning: IPs will be exposed at /net_info, for more information https://github.com/tendermint/tendermint/issues/3055
@@ -277,14 +277,6 @@ recv-rate = 20480000
 # List of node IDs, to which a connection will be (re)established ignoring any existing limits
 unconditional-peer-ids = ""
 
-# Maximum number of inbound peers
-max-num-inbound-peers = 0
-
-# Maximum number of outbound peers to connect to, excluding persistent peers
-max-num-outbound-peers = 0
-
-# List of node IDs, to which a connection will be (re)established ignoring any existing limits
-seeds = ""
 
 #######################################################
 ###          Mempool Configuration Option          ###
