@@ -1,29 +1,32 @@
 #!/bin/bash
 
+# 获取脚本所在目录的绝对路径
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
+
 # 检查节点是否已初始化
-if [ ! -d "../.sei" ]; then
+if [ ! -d "$PROJECT_ROOT/testnet/.sei" ]; then
     echo "节点未初始化，正在运行初始化脚本..."
-    ./init_local.sh
+    "$SCRIPT_DIR/init_local.sh"
 fi
 
 # 设置环境变量
-export SEI_LOG_LEVEL=debug
-export SEI_LOG_FORMAT=json
+export SEI_HOME="./.sei"
+export SEI_CHAIN_ID="sei-local-1"
 
 # 启动节点
 echo "正在启动节点..."
 seid start \
-    --home ../.sei \
-    --rpc.laddr tcp://0.0.0.0:26657 \
-    --p2p.laddr tcp://0.0.0.0:26656 \
-    --grpc.address 0.0.0.0:9090 \
-    --grpc-web.address 0.0.0.0:9091 \
-    --minimum-gas-prices 0.0001usei \
-    --mode validator \
-    --db-backend goleveldb \
-    --p2p.pex=false \
-    --p2p.persistent-peers="" \
-    --consensus.create-empty-blocks=true \
-    --consensus.create-empty-blocks-interval "5s" \
-    --log_level debug \
-    --trace 
+  --home $SEI_HOME \
+  --chain-id $SEI_CHAIN_ID \
+  --consensus.create-empty-blocks \
+  --consensus.create-empty-blocks-interval="5s" \
+  --p2p.upnp=false \
+  --p2p.pex=false \
+  --mode="validator" \
+  --minimum-gas-prices="0.0001usei" \
+  --moniker="local-testnet" \
+  --log_level="info" \
+  --rpc.laddr="tcp://0.0.0.0:26657" \
+  --grpc.address="0.0.0.0:9090" \
+  --grpc-web.address="0.0.0.0:9091" 

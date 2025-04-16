@@ -15,7 +15,7 @@
 proxy-app = "tcp://127.0.0.1:26658"
 
 # A custom human readable name for this node
-moniker = "my-local-testnet"
+moniker = "MacBook-Pro.local"
 
 # Mode of Node: full | validator | seed
 # * validator node
@@ -239,7 +239,7 @@ blocksync-peers = ""
 upnp = false
 
 # Maximum number of connections (inbound and outbound).
-max-connections = 200
+max-connections = 64
 
 # Rate limits the number of incoming connection attempts per IP address.
 max-incoming-connection-attempts = 100
@@ -260,19 +260,19 @@ dial-timeout = "3s"
 
 # Time to wait before flushing messages out on the connection
 # TODO: Remove once MConnConnection is removed.
-flush-throttle-timeout = "10ms"
+flush-throttle-timeout = "100ms"
 
 # Maximum size of a message packet payload, in bytes
 # TODO: Remove once MConnConnection is removed.
-max-packet-msg-payload-size = 1000000
+max-packet-msg-payload-size = 1400
 
 # Rate at which packets can be sent, in bytes/second
 # TODO: Remove once MConnConnection is removed.
-send-rate = 20480000
+send-rate = 5120000
 
 # Rate at which packets can be received, in bytes/second
 # TODO: Remove once MConnConnection is removed.
-recv-rate = 20480000
+recv-rate = 5120000
 
 # List of node IDs, to which a connection will be (re)established ignoring any existing limits
 unconditional-peer-ids = ""
@@ -291,12 +291,12 @@ unconditional-peer-ids = ""
 broadcast = true
 
 # Maximum number of transactions in the mempool
-size = 1000
+size = 5000
 
 # Limit the total size of all txs in the mempool.
 # This only accounts for raw transactions (e.g. given 1MB transactions and
 # max-txs-bytes=5MB, mempool will only accept 5 transactions).
-max-txs-bytes = 10737418240
+max-txs-bytes = 1073741824
 
 # Size of the cache (used to filter transactions we saw earlier) in transactions
 cache-size = 10000
@@ -308,7 +308,7 @@ keep-invalid-txs-in-cache = false
 
 # Maximum size of a single transaction.
 # NOTE: the max size of a tx transmitted over the network is {max-tx-bytes}.
-max-tx-bytes = 2048576
+max-tx-bytes = 1048576
 
 # Maximum size of a batch of transactions to send to a peer
 # Including space needed by encoding (one varint per transaction).
@@ -321,7 +321,7 @@ max-batch-bytes = 0
 # Note, if ttl-num-blocks is also defined, a transaction will be removed if it
 # has existed in the mempool at least ttl-num-blocks number of blocks or if it's
 # insertion time into the mempool is beyond ttl-duration.
-ttl-duration = "5s"
+ttl-duration = "0s"
 
 # ttl-num-blocks, if non-zero, defines the maximum number of blocks a transaction
 # can exist for in the mempool.
@@ -329,7 +329,7 @@ ttl-duration = "5s"
 # Note, if ttl-duration is also defined, a transaction will be removed if it
 # has existed in the mempool at least ttl-num-blocks number of blocks or if
 # it's insertion time into the mempool is beyond ttl-duration.
-ttl-num-blocks = 10
+ttl-num-blocks = 0
 
 tx-notify-threshold = 0
 
@@ -439,29 +439,29 @@ peer-query-maj23-sleep-duration = "2s"
 # This field provides an unsafe override of the Propose timeout consensus parameter.
 # This field configures how long the consensus engine will wait for a proposal block before prevoting nil.
 # If this field is set to a value greater than 0, it will take effect.
-unsafe-propose-timeout-override = "300ms"
+unsafe-propose-timeout-override = "0s"
 
 # This field provides an unsafe override of the ProposeDelta timeout consensus parameter.
 # This field configures how much the propose timeout increases with each round.
 # If this field is set to a value greater than 0, it will take effect.
-unsafe-propose-timeout-delta-override = "50ms"
+unsafe-propose-timeout-delta-override = "0s"
 
 # This field provides an unsafe override of the Vote timeout consensus parameter.
 # This field configures how long the consensus engine will wait after
 # receiving +2/3 votes in a round.
 # If this field is set to a value greater than 0, it will take effect.
-unsafe-vote-timeout-override = "50ms"
+unsafe-vote-timeout-override = "0s"
 
 # This field provides an unsafe override of the VoteDelta timeout consensus parameter.
 # This field configures how much the vote timeout increases with each round.
 # If this field is set to a value greater than 0, it will take effect.
-unsafe-vote-timeout-delta-override = "50ms"
+unsafe-vote-timeout-delta-override = "0s"
 
 # This field provides an unsafe override of the Commit timeout consensus parameter.
 # This field configures how long the consensus engine will wait after receiving
 # +2/3 precommits before beginning the next height.
 # If this field is set to a value greater than 0, it will take effect.
-unsafe-commit-timeout-override = "200ms"
+unsafe-commit-timeout-override = "5s"
 
 # This field provides an unsafe override of the BypassCommitTimeout consensus parameter.
 # This field configures if the consensus engine will wait for the full Commit timeout
@@ -500,7 +500,7 @@ psql-conn = ""
 # When true, Prometheus metrics are served under /metrics on
 # PrometheusListenAddr.
 # Check out the documentation for the list of available metrics.
-prometheus = true
+prometheus = false
 
 # Address to listen for Prometheus collector(s) connections
 prometheus-listen-addr = ":26660"
