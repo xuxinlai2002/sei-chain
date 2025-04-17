@@ -27,7 +27,7 @@ moniker = "MacBook-Pro.local"
 # * seed node
 #   - only P2P, PEX Reactor
 #   - No priv_validator_key.json, priv_validator_state.json
-mode = "full"
+mode = "validator"
 
 # Database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb
 # * goleveldb (github.com/syndtr/goleveldb - most popular implementation)
@@ -417,7 +417,7 @@ double-sign-check-height = 0
 
 # EmptyBlocks mode and possible interval between empty blocks
 create-empty-blocks = true
-create-empty-blocks-interval = "0s"
+create-empty-blocks-interval = "5s"
 
 # Only gossip hashes, not the actual data
 gossip-tx-key-only = "true"
@@ -439,23 +439,23 @@ peer-query-maj23-sleep-duration = "2s"
 # This field provides an unsafe override of the Propose timeout consensus parameter.
 # This field configures how long the consensus engine will wait for a proposal block before prevoting nil.
 # If this field is set to a value greater than 0, it will take effect.
-unsafe-propose-timeout-override = "0s"
+unsafe-propose-timeout-override = "3s"
 
 # This field provides an unsafe override of the ProposeDelta timeout consensus parameter.
 # This field configures how much the propose timeout increases with each round.
 # If this field is set to a value greater than 0, it will take effect.
-unsafe-propose-timeout-delta-override = "0s"
+unsafe-propose-timeout-delta-override = "500ms"
 
 # This field provides an unsafe override of the Vote timeout consensus parameter.
 # This field configures how long the consensus engine will wait after
 # receiving +2/3 votes in a round.
 # If this field is set to a value greater than 0, it will take effect.
-unsafe-vote-timeout-override = "0s"
+unsafe-vote-timeout-override = "1s"
 
 # This field provides an unsafe override of the VoteDelta timeout consensus parameter.
 # This field configures how much the vote timeout increases with each round.
 # If this field is set to a value greater than 0, it will take effect.
-unsafe-vote-timeout-delta-override = "0s"
+unsafe-vote-timeout-delta-override = "500ms"
 
 # This field provides an unsafe override of the Commit timeout consensus parameter.
 # This field configures how long the consensus engine will wait after receiving
