@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 设置变量
-CHAIN_ID="sei-local-1"
+CHAIN_ID="Agt-2"
 MONIKER="my-local-testnet"
 KEY_NAME="validator"
 KEY_2_NAME="user1"
@@ -39,51 +39,87 @@ seid collect-gentxs --home "$PROJECT_ROOT/testnet/.sei"
 # 验证创世文件
 seid validate-genesis --home "$PROJECT_ROOT/testnet/.sei"
 
-# 配置 app.toml
-cat > "$PROJECT_ROOT/testnet/.sei/config/app.toml" << EOF
+# 配置 config.toml
+cat > "$PROJECT_ROOT/testnet/.sei/config/config.toml" << EOF
 # This is a TOML config file.
 # For more information, see https://github.com/toml-lang/toml
 
-###############################################################################
-###                           Base Configuration                            ###
-###############################################################################
+proxy-app = "tcp://127.0.0.1:26658"
+moniker = "my-local-testnet"
+mode = "validator"
+fast_sync = false
+db-backend = "goleveldb"
+db-dir = "data"
+log-level = "info"
+log-format = "plain"
 
-minimum-gas-prices = "0.02usei"
-pruning = "default"
+[rpc]
+laddr = "tcp://0.0.0.0:26657"
+cors_allowed_origins = ["*"]
+cors_allowed_methods = ["HEAD", "GET", "POST"]
+cors_allowed_headers = ["Origin", "Accept", "Content-Type", "X-Requested-With", "X-Server-Time"]
+
+[p2p]
+laddr = "tcp://0.0.0.0:26656"
+external_address = ""
+seeds = ""
+persistent_peers = ""
+upnp = false
+addr_book_strict = false
+max_num_inbound_peers = 0
+max_num_outbound_peers = 0
+unconditional_peer_ids = ""
+persistent_peers_max_dial_period = "0s"
+flush_throttle_timeout = "10ms"
+max_packet_msg_payload_size = 1024
+send_rate = 20480000
+recv_rate = 20480000
+pex = false
+seed_mode = false
+private_peer_ids = ""
+
+[mempool]
+size = 10000
+cache_size = 20000
+max_txs_bytes = 1073741824
+max_tx_bytes = 1048576
+max_gas_wanted_per_tx = "50000000"
+max_gas_used_per_block = "100000000"
+
+[consensus]
+wal_file = "data/cs.wal/wal"
+timeout_propose = "3s"
+timeout_propose_delta = "500ms"
+timeout_prevote = "1s"
+timeout_prevote_delta = "500ms"
+timeout_precommit = "1s"
+timeout_precommit_delta = "500ms"
+timeout_commit = "1s"
+double_sign_check_height = 0
+skip_timeout_commit = false
+create_empty_blocks = true
+create_empty_blocks_interval = "0s"
+peer_gossip_sleep_duration = "10ms"
+peer_query_maj23_sleep_duration = "2s"
+
+[tx_index]
+indexer = "kv"
+EOF
+
+# 配置 app.toml
+cat > "$PROJECT_ROOT/testnet/.sei/config/app.toml" << EOF
+minimum-gas-prices = "0.0001usei"
+pruning = "nothing"
 pruning-keep-recent = "0"
 pruning-keep-every = "0"
-pruning-interval = "3271"
+pruning-interval = "0"
 halt-height = 0
 halt-time = 0
 min-retain-blocks = 0
 inter-block-cache = true
 index-events = []
 iavl-cache-size = 781250
-iavl-disable-fastnode = true
-compaction-interval = 0
-no-versioning = false
-separate-orphan-storage = false
-separate-orphan-versions-to-keep = 0
-num-orphan-per-file = 0
-orphan-dir = ""
-occ-enabled = false
-
-###############################################################################
-###                         Telemetry Configuration                         ###
-###############################################################################
-
-[telemetry]
-service-name = "seid"
-enabled = false
-enable-hostname = false
-enable-hostname-label = false
-enable-service-label = false
-prometheus-retention-time = 0
-global-labels = []
-
-###############################################################################
-###                           API Configuration                             ###
-###############################################################################
+iavl-disable-fastnode = false
 
 [api]
 enable = true
@@ -93,36 +129,24 @@ max-open-connections = 1000
 rpc-read-timeout = 10
 rpc-write-timeout = 0
 rpc-max-body-bytes = 1000000
-enabled-unsafe-cors = false
-
-###############################################################################
-###                           gRPC Configuration                            ###
-###############################################################################
+enabled-unsafe-cors = true
 
 [grpc]
 enable = true
 address = "0.0.0.0:9090"
 
-###############################################################################
-###                        gRPC Web Configuration                           ###
-###############################################################################
-
 [grpc-web]
 enable = true
 address = "0.0.0.0:9091"
-enable-unsafe-cors = false
-
-###############################################################################
-###                        State Sync Configuration                         ###
-###############################################################################
+enable-unsafe-cors = true
 
 [state-sync]
 snapshot-interval = 0
 snapshot-keep-recent = 2
 
-###############################################################################
-###                             SeiDB Configuration                         ###
-###############################################################################
+[telemetry]
+enabled = false
+global-labels = []
 
 [state-commit]
 sc-enable = true
@@ -146,28 +170,12 @@ http_enabled = true
 http_port = 8545
 ws_enabled = true
 ws_port = 8546
-read_timeout = "30s"
-read_header_timeout = "10s"
-write_timeout = "30s"
-idle_timeout = "120s"
 simulation_gas_limit = 10000000
 simulation_evm_timeout = "60s"
 cors_origins = "*"
 ws_origins = "*"
-filter_timeout = "120s"
-checktx_timeout = "5s"
 max_tx_pool_txs = 1000
-slow = false
-deny_list = []
-max_log_no_block = 10000
-max_blocks_for_log = 2000
-max_subscriptions_new_head = 10000
-enable_test_api = false
-
-[evm-log]
-level = "debug"
-module = ["eth", "evm", "vm", "state", "txpool"]
-file = "../.sei/evm.log"
+params = { chain_id = "32383" }
 EOF
 
 echo "初始化完成！" 

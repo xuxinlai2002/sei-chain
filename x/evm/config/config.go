@@ -15,6 +15,7 @@ var ChainIDMapping = map[string]int64{
 	// atlantic-2 chain ID == 0x530
 	"atlantic-2": int64(1328),
 	"arctic-1":   int64(713715),
+	"Agt-2":      int64(32383),
 }
 
 func GetEVMChainID(cosmosChainID string) *big.Int {
