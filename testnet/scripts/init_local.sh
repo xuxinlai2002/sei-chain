@@ -66,15 +66,15 @@ seeds = ""
 persistent_peers = ""
 upnp = false
 addr_book_strict = false
-max_num_inbound_peers = 10
-max_num_outbound_peers = 10
+max_num_inbound_peers = 0
+max_num_outbound_peers = 0
 unconditional_peer_ids = ""
 persistent_peers_max_dial_period = "0s"
 flush_throttle_timeout = "10ms"
 max_packet_msg_payload_size = 1024
-send_rate = 20480000
-recv_rate = 20480000
-pex = true
+send_rate = 0
+recv_rate = 0
+pex = false
 seed_mode = false
 private_peer_ids = ""
 
@@ -85,25 +85,98 @@ max_txs_bytes = 1073741824
 max_tx_bytes = 1048576
 max_gas_wanted_per_tx = "50000000"
 max_gas_used_per_block = "100000000"
+recheck = true
+broadcast = true
 
 [consensus]
 wal_file = "data/cs.wal/wal"
-timeout_propose = "3s"
-timeout_propose_delta = "500ms"
-timeout_prevote = "1s"
-timeout_prevote_delta = "500ms"
-timeout_precommit = "1s"
-timeout_precommit_delta = "500ms"
-timeout_commit = "1s"
+timeout_propose = "200ms"
+timeout_propose_delta = "100ms"
+timeout_prevote = "100ms"
+timeout_prevote_delta = "100ms"
+timeout_precommit = "100ms"
+timeout_precommit_delta = "100ms"
+timeout_commit = "100ms"
 double_sign_check_height = 0
-skip_timeout_commit = false
+skip_timeout_commit = true
 create_empty_blocks = true
-create_empty_blocks_interval = "0s"
+create_empty_blocks_interval = "200ms"
 peer_gossip_sleep_duration = "10ms"
 peer_query_maj23_sleep_duration = "2s"
+block_sync = false
+fast_sync = false
 
 [tx_index]
 indexer = "kv"
+
+[blockchain]
+fast_sync = false
+block_sync = false
+max_peer_height = 0
+max_block_height = 0
+max_block_time = "0s"
+max_block_size = 0
+max_block_gas = 0
+max_block_txs = 0
+max_block_parts = 0
+max_block_evidence = 0
+max_block_consensus = 0
+max_block_validators = 0
+max_block_proposer = 0
+max_block_height_diff = 0
+max_block_time_diff = "0s"
+max_block_height_sync = 0
+max_block_time_sync = "0s"
+max_block_height_catchup = 0
+max_block_time_catchup = "0s"
+max_block_height_timeout = 0
+max_block_time_timeout = "0s"
+max_block_height_retry = 0
+max_block_time_retry = "0s"
+
+[state-sync]
+snapshot-interval = 0
+snapshot-keep-recent = 2
+
+[telemetry]
+enabled = false
+global-labels = []
+
+[state-commit]
+sc-enable = true
+sc-zero-copy = false
+sc-async-commit-buffer = 100
+sc-keep-recent = 1
+sc-snapshot-interval = 10000
+sc-snapshot-writer-limit = 2
+sc-cache-size = 100000
+
+[state-store]
+ss-enable = true
+ss-backend = "pebbledb"
+ss-async-write-buffer = 100
+ss-keep-recent = 100000
+ss-prune-interval = 600
+ss-import-num-workers = 1
+
+[evm]
+http_enabled = true
+http_port = 8545
+ws_enabled = true
+ws_port = 8546
+simulation_gas_limit = 10000000
+simulation_evm_timeout = "60s"
+cors_origins = "*"
+ws_origins = "*"
+max_tx_pool_txs = 1000
+params = { chain_id = "32383" }
+
+[validator]
+name = "validator"
+pub_key = ""
+power = "1000000000"
+voting_power = "1000000000"
+proposer_priority = 1000
 EOF
 
 # 配置 app.toml
