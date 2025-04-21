@@ -26,6 +26,9 @@ seid init ${MONIKER} ${CHAINFLAG} --home "$PROJECT_ROOT/testnet/.sei"
 seid keys add ${KEY_NAME} --keyring-backend test --home "$PROJECT_ROOT/testnet/.sei"
 seid keys add ${KEY_2_NAME} --keyring-backend test --home "$PROJECT_ROOT/testnet/.sei"
 
+# 获取验证者地址
+VALIDATOR_ADDR=$(seid keys show ${KEY_NAME} -a --keyring-backend test --home "$PROJECT_ROOT/testnet/.sei")
+
 # 添加创世账户
 seid add-genesis-account $(seid keys show ${KEY_NAME} -a --keyring-backend test --home "$PROJECT_ROOT/testnet/.sei") ${TOKEN_AMOUNT} --home "$PROJECT_ROOT/testnet/.sei"
 seid add-genesis-account $(seid keys show ${KEY_2_NAME} -a --keyring-backend test --home "$PROJECT_ROOT/testnet/.sei") ${TOKEN_AMOUNT} --home "$PROJECT_ROOT/testnet/.sei"
@@ -105,6 +108,7 @@ peer_gossip_sleep_duration = "10ms"
 peer_query_maj23_sleep_duration = "2s"
 block_sync = false
 fast_sync = false
+validator_update_interval = 0
 
 [tx_index]
 indexer = "kv"
@@ -163,7 +167,7 @@ ss-import-num-workers = 1
 http_enabled = true
 http_port = 8545
 ws_enabled = true
-ws_port = 8546
+ws_port = 0
 simulation_gas_limit = 10000000
 simulation_evm_timeout = "60s"
 cors_origins = "*"
@@ -173,10 +177,14 @@ params = { chain_id = "32383" }
 
 [validator]
 name = "validator"
-pub_key = ""
+pub_key = "seivaloper1t0tkgd27eyyy2hdg8y3g5gwrhnc206p595959e"
 power = "1000000000"
 voting_power = "1000000000"
 proposer_priority = 1000
+
+[genesis]
+chain_id = "Agt-2"
+app_state = { validators = [{ pub_key = "seivaloper1t0tkgd27eyyy2hdg8y3g5gwrhnc206p595959e", power = "1000000000" }] }
 EOF
 
 # 配置 app.toml
@@ -242,7 +250,7 @@ ss-import-num-workers = 1
 http_enabled = true
 http_port = 8545
 ws_enabled = true
-ws_port = 8546
+ws_port = 0
 simulation_gas_limit = 10000000
 simulation_evm_timeout = "60s"
 cors_origins = "*"
