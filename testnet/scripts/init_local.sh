@@ -108,7 +108,7 @@ peer_gossip_sleep_duration = "10ms"
 peer_query_maj23_sleep_duration = "2s"
 block_sync = false
 fast_sync = false
-validator_update_interval = 0
+validator_update_interval = 1000000
 
 [tx_index]
 indexer = "kv"
@@ -116,8 +116,8 @@ indexer = "kv"
 [blockchain]
 fast_sync = false
 block_sync = false
-max_peer_height = 0
-max_block_height = 0
+max_peer_height = 1000000
+max_block_height = 1000000
 max_block_time = "0s"
 max_block_size = 0
 max_block_gas = 0
@@ -129,18 +129,18 @@ max_block_validators = 0
 max_block_proposer = 0
 max_block_height_diff = 0
 max_block_time_diff = "0s"
-max_block_height_sync = 0
+max_block_height_sync = 1000000
 max_block_time_sync = "0s"
-max_block_height_catchup = 0
+max_block_height_catchup = 1000000
 max_block_time_catchup = "0s"
-max_block_height_timeout = 0
+max_block_height_timeout = 1000000
 max_block_time_timeout = "0s"
-max_block_height_retry = 0
+max_block_height_retry = 1000000
 max_block_time_retry = "0s"
 
 [state-sync]
-snapshot-interval = 0
-snapshot-keep-recent = 2
+snapshot-interval = 100000
+snapshot-keep-recent = 10
 
 [telemetry]
 enabled = false
@@ -166,8 +166,10 @@ ss-import-num-workers = 1
 [evm]
 http_enabled = true
 http_port = 8545
+http_addr = "0.0.0.0"
 ws_enabled = true
 ws_port = 0
+ws_addr = "0.0.0.0"
 simulation_gas_limit = 10000000
 simulation_evm_timeout = "60s"
 cors_origins = "*"
@@ -194,7 +196,7 @@ pruning = "nothing"
 pruning-keep-recent = "0"
 pruning-keep-every = "0"
 pruning-interval = "0"
-halt-height = 0
+halt-height = 1000000
 halt-time = 0
 min-retain-blocks = 0
 inter-block-cache = true
@@ -222,8 +224,8 @@ address = "0.0.0.0:9091"
 enable-unsafe-cors = true
 
 [state-sync]
-snapshot-interval = 0
-snapshot-keep-recent = 2
+snapshot-interval = 100000
+snapshot-keep-recent = 10
 
 [telemetry]
 enabled = false
@@ -249,8 +251,10 @@ ss-import-num-workers = 1
 [evm]
 http_enabled = true
 http_port = 8545
+http_addr = "0.0.0.0"
 ws_enabled = true
 ws_port = 0
+ws_addr = "0.0.0.0"
 simulation_gas_limit = 10000000
 simulation_evm_timeout = "60s"
 cors_origins = "*"
