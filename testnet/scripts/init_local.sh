@@ -42,6 +42,9 @@ seid collect-gentxs --home "$PROJECT_ROOT/testnet/.sei"
 # 验证创世文件
 seid validate-genesis --home "$PROJECT_ROOT/testnet/.sei"
 
+# 在收集创世交易之后，修改genesis.json添加slash_window参数
+sed -i '' 's/"slash_window": "216000"/"slash_window": "2160000000"/g' "$PROJECT_ROOT/testnet/.sei/config/genesis.json"
+
 # 配置 config.toml
 cat > "$PROJECT_ROOT/testnet/.sei/config/config.toml" << EOF
 # This is a TOML config file.
@@ -108,7 +111,7 @@ peer_gossip_sleep_duration = "10ms"
 peer_query_maj23_sleep_duration = "2s"
 block_sync = false
 fast_sync = false
-validator_update_interval = 1000000
+validator_update_interval = 10000000000
 
 [tx_index]
 indexer = "kv"
